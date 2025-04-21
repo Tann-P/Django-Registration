@@ -5,7 +5,6 @@ A Django-based user registration system with Excel export functionality.
 ## Features
 
 - User registration with form validation
-- Password confirmation
 - Success messages
 - Excel export of registered user data
 - Responsive design
