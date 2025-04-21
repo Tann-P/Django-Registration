@@ -7,6 +7,7 @@ import openpyxl
 from openpyxl.styles import Font, Alignment
 from openpyxl.utils import get_column_letter
 from datetime import datetime
+from django.utils import timezone  # Import timezone module to handle time zones
 
 # Registration form view - handles both form display and submission
 def form(request):
@@ -62,7 +63,13 @@ def export_to_excel(request):
         worksheet.cell(row=row_num, column=4).value = registration.email
         worksheet.cell(row=row_num, column=5).value = registration.date_of_birth
         worksheet.cell(row=row_num, column=6).value = registration.phone_number
-        worksheet.cell(row=row_num, column=7).value = registration.created_at
+        
+        # Remove timezone information from created_at to make it compatible with Excel
+        if registration.created_at:
+            created_at_naive = timezone.make_naive(registration.created_at) if timezone.is_aware(registration.created_at) else registration.created_at
+            worksheet.cell(row=row_num, column=7).value = created_at_naive
+        else:
+            worksheet.cell(row=row_num, column=7).value = None
     
     # Auto-adjust column widths for better readability
     for column in worksheet.columns:
