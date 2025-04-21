@@ -97,3 +97,11 @@ def export_to_excel(request):
     workbook.save(response)
     
     return response
+
+# View to display all registration information
+def all_registrations(request):
+    # Fetch all registration records from the database
+    registrations = Registration.objects.all().order_by('-created_at')
+    
+    # Render the template with all registrations data
+    return render(request, 'registrations_list.html', {'registrations': registrations})

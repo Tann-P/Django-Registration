@@ -170,13 +170,13 @@
             {% endif %}
         </div>
         
-        <!-- Button container with register and export buttons -->
+        <!-- Button container with register and view registrations buttons -->
         <div class="button-group">
             <!-- Register button submits the form -->
             <button type="submit">Register</button>
             
-            <!-- Export button links to the export URL -->
-            <a href="{% url 'export_excel' %}"><button type="button" class="export-btn">Export to Excel</button></a>
+            <!-- View All Registrations button -->
+            <a href="{% url 'all_registrations' %}"><button type="button" class="export-btn">View All Registrations</button></a>
         </div>
     </form>
 </body>

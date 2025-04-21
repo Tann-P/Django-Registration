@@ -10,4 +10,7 @@ urlpatterns = [
     # URL pattern for exporting registration data to Excel
     # The name='export_excel' allows referring to this URL in templates with {% url 'export_excel' %}
     path('export/', views.export_to_excel, name='export_excel'),
+    
+    # URL pattern for viewing all registrations
+    path('registrations/', views.all_registrations, name='all_registrations'),
 ]
