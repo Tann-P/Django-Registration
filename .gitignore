@@ -2,7 +2,7 @@
 *.log
 *.pot
 *.pyc
-__pycache__
+__pycache__/
 db.sqlite3
 media
 
@@ -43,6 +43,3 @@ venv.bak/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-# SQLite database files
-*.sqlite3
