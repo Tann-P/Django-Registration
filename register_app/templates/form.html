@@ -134,24 +134,6 @@
             {% endif %}
         </div>
         
-        <!-- Password field -->
-        <div class="form-group">
-            <label for="id_password">Password:</label>
-            {{ form.password }}
-            {% if form.password.errors %}
-            <div class="error-message">{{ form.password.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <!-- Password confirmation field (for validation) -->
-        <div class="form-group">
-            <label for="id_password_confirm">Confirm Password:</label>
-            {{ form.password_confirm }}
-            {% if form.password_confirm.errors %}
-            <div class="error-message">{{ form.password_confirm.errors }}</div>
-            {% endif %}
-        </div>
-        
         <!-- Date of birth field (optional) -->
         <div class="form-group">
             <label for="id_date_of_birth">Date of Birth (optional):</label>
@@ -170,14 +152,16 @@
             {% endif %}
         </div>
         
-        <!-- Button container with register and view registrations buttons -->
+        <!-- Button container with register button -->
         <div class="button-group">
-            <!-- Register button submits the form -->
-            <button type="submit">Register</button>
-            
-            <!-- View All Registrations button -->
-            <a href="{% url 'all_registrations' %}"><button type="button" class="export-btn">View All Registrations</button></a>
+            <!-- Register button submits the form - fixed with proper styling -->
+            <button type="submit" class="btn" style="background-color: #4CAF50; color: white;">Register</button>
         </div>
     </form>
+    
+    <!-- View All Registrations button outside the form -->
+    <div class="button-group" style="margin-top: 10px;">
+        <a href="{% url 'all_registrations' %}" class="export-btn" style="text-decoration: none; display: inline-block; background-color: #007bff; color: white; padding: 10px 15px; border-radius: 4px; font-size: 16px;">View All Registrations</a>
+    </div>
 </body>
 </html>

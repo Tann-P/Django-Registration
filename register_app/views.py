@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegistrationForm
@@ -105,3 +105,34 @@ def all_registrations(request):
     
     # Render the template with all registrations data
     return render(request, 'registrations_list.html', {'registrations': registrations})
+
+# View to delete a registration record
+def delete_registration(request, id):
+    # Get the registration object or return 404 if not found
+    registration = get_object_or_404(Registration, pk=id)
+    
+    if request.method == 'POST':
+        # Delete the registration record
+        registration.delete()
+        # Add success message
+        messages.success(request, f'Registration for {registration.first_name} {registration.last_name} has been deleted.')
+        # Redirect to registrations list
+        return redirect('all_registrations')
+    
+    # For GET requests, show confirmation page
+    return render(request, 'confirm_delete.html', {'registration': registration})
+
+# View to delete all registration records
+def delete_all_registrations(request):
+    if request.method == 'POST':
+        # Get the count before deletion
+        count = Registration.objects.count()
+        # Delete all registration records
+        Registration.objects.all().delete()
+        # Add success message
+        messages.success(request, f'All {count} registrations have been deleted.')
+        # Redirect to registrations list
+        return redirect('all_registrations')
+    
+    # For GET requests, show confirmation page
+    return render(request, 'confirm_delete_all.html')

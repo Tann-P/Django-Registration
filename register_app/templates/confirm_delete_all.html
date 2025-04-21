@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #dc3545;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .confirmation-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        
+        .button.red {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .button.gray {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .button:hover {
+            opacity: 0.9;
+        }
+        
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirm Delete All Registrations</h1>
+    
+    <div class="confirmation-box">
+        <h2 class="warning">Warning: This action cannot be undone!</h2>
+        <p>You are about to delete <strong>ALL</strong> registrations from the database.</p>
+        <p>This is a destructive operation that cannot be reversed.</p>
+        <p>Are you absolutely sure you want to proceed?</p>
+    </div>
+    
+    <form method="post" action="{% url 'delete_all_registrations' %}">
+        {% csrf_token %}
+        <button type="submit" class="button red">Yes, delete ALL registrations</button>
+    </form>
+    
+    <a href="{% url 'all_registrations' %}" class="button gray">Cancel</a>
+</body>
+</html>

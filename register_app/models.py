@@ -10,12 +10,11 @@ class Registration(models.Model):
     email = models.EmailField(unique=True)  # Email must be unique to prevent duplicate registrations
     phone_number = models.CharField(max_length=15, blank=True)  # Optional phone number field
     
-    # Security field - stores user password
-    # NOTE: In production, use Django's auth system for proper password hashing
-    password = models.CharField(max_length=128)
-    
     # Additional information
     date_of_birth = models.DateField(null=True, blank=True)  # Optional date of birth
+    
+    # Temporary password field with null=True to allow migration to work
+    password = models.CharField(max_length=128, null=True, blank=True)
     
     # Metadata - automatically tracks when the registration was created
     created_at = models.DateTimeField(auto_now_add=True)  # Auto-populated with current time on creation

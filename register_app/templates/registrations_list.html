@@ -40,6 +40,10 @@
             background-color: #007bff;
         }
         
+        .button.red {
+            background-color: #dc3545;
+        }
+        
         .button:hover {
             opacity: 0.9;
         }
@@ -81,6 +85,21 @@
             color: #555;
         }
         
+        .messages {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .delete-all-container {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        
         @media (max-width: 768px) {
             /* Make the table responsive on mobile */
             table, thead, tbody, th, td, tr {
@@ -120,11 +139,20 @@
             td:nth-of-type(5):before { content: "Phone"; }
             td:nth-of-type(6):before { content: "Date of Birth"; }
             td:nth-of-type(7):before { content: "Registration Date"; }
+            td:nth-of-type(8):before { content: "Actions"; }
         }
     </style>
 </head>
 <body>
     <h1>All Registrations</h1>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
     
     <div class="nav-buttons">
         <a href="{% url 'form' %}" class="button">Back to Registration Form</a>
@@ -136,6 +164,12 @@
     </div>
     
     {% if registrations %}
+        {% if registrations.count > 1 %}
+        <div class="delete-all-container">
+            <a href="{% url 'delete_all_registrations' %}" class="button red">Delete All Registrations</a>
+        </div>
+        {% endif %}
+        
         <table>
             <thead>
                 <tr>
@@ -146,6 +180,7 @@
                     <th>Phone</th>
                     <th>Date of Birth</th>
                     <th>Registration Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -158,6 +193,9 @@
                     <td>{{ registration.phone_number|default:"-" }}</td>
                     <td>{{ registration.date_of_birth|date:"F d, Y"|default:"-" }}</td>
                     <td>{{ registration.created_at|date:"F d, Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'delete_registration' registration.id %}" class="button red">Delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

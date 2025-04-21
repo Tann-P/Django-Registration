@@ -13,4 +13,10 @@ urlpatterns = [
     
     # URL pattern for viewing all registrations
     path('registrations/', views.all_registrations, name='all_registrations'),
+    
+    # URL pattern for deleting a registration record
+    path('delete/<int:id>/', views.delete_registration, name='delete_registration'),
+    
+    # URL pattern for deleting all registrations
+    path('delete-all/', views.delete_all_registrations, name='delete_all_registrations'),
 ]
